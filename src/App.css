@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.Logo {
+  margin: 60px 20px 0px 20px;
+  height: 150px;
+  animation: Logo-bounce 1s infinite alternate;
+}
+
+@keyframes Logo-bounce {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-30px); }
+}
