@@ -8,15 +8,16 @@ services:
       context: .
       dockerfile: ./docker/app/Dockerfile
     volumes:
-      - .:/bmahlstedt
+      - .:/src
+      - /src/node_modules
     expose:
-      - 8080
+        - 8080
     environment:
       - VIRTUAL_HOST=bmahlstedt.com,www.bmahlstedt.com
-      - VIRTUAL_PROTO=uwsgi
       - LETSENCRYPT_HOST=bmahlstedt.com
       - LETSENCRYPT_EMAIL=brian.mahlstedt@gmail.com
-    command: "uwsgi --ini ./docker/app/uwsgi.ini"
+      - PORT=8080
+    command: "npm start"
 
 networks:
   default:
