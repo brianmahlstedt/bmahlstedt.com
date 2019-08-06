@@ -38,9 +38,6 @@ class BlogHome extends React.Component {
         return (
             <div className="container">
                 <div className="row pt-5">
-                    <div className="col-12 col-lg-6 offset-lg-3">
-                        <h1 className="text-center">Blog</h1>
-                    </div>
                     <Form />
                 </div>
                 <hr className="mt-5" />

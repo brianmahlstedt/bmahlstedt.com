@@ -1,13 +1,5 @@
 body, html {
     height: 100%;
-    background-color: rgba(0,0,0,0.018);
-    margin: 0;
-    padding: 0;
     font-family: 'sans-serif';
-    /* to convert newlines /n into breaks <br> */
-    white-space: pre-line;
-}
-
-.active {
-  color: red;
+    white-space: pre-line;  /* to convert newlines /n into breaks <br> */
 }
