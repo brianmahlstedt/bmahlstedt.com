@@ -1,13 +1,15 @@
 import React from 'react';
-import warriors from './warriors.svg';
-import niners from './niners.svg';
-import sharks from './sharks.svg';
-import giants from './giants.svg';
-import './App.css';
 
-function App() {
+import warriors from './images/warriors.svg';
+import niners from './images/niners.svg';
+import sharks from './images/sharks.svg';
+import giants from './images/giants.svg';
+
+import './Logos.css';
+
+function Logos() {
   return (
-    <div className="App">
+    <div className="Logos">
       <img src={warriors} className="Logo" alt="warriors-logo"/>
       <img src={giants} className="Logo" alt="giants-logo" />
       <img src={sharks} className="Logo" alt="sharks-logo" />
@@ -16,4 +18,4 @@ function App() {
   ); 
 }
 
-export default App;
+export default Logos;
