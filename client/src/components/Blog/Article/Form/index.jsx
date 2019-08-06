@@ -75,7 +75,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    articleToEdit: state.home.articleToEdit,
+    articleToEdit: state.blog.articleToEdit,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

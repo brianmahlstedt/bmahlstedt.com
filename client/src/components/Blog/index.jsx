@@ -35,10 +35,6 @@ class BlogHome extends React.Component {
     render() {
         const { articles } = this.props;
 
-        if (typeof articles === 'undefined') {
-            return <div>Fetching articles...</div>
-        }
-
         return (
             <div className="container">
                 <div className="row pt-5">
@@ -85,7 +81,7 @@ class BlogHome extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    articles: state.home.articles,
+    articles: state.blog.articles,
 });
 
 const mapDispatchToProps = dispatch => ({
