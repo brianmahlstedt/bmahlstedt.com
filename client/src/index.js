@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,11 +13,21 @@ ReactDOM.render(
     <Router history={createBrowserHistory()}>
         <Provider store={store}>
             <div>
-                <ul>
-                    <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
-                    <li><NavLink activeClassName="active" to="/logos">Logos</NavLink></li>
-                    <li><NavLink activeClassName="active" to="/blog">Blog</NavLink></li>
-                </ul>
+                <button type="button" className="btn btn-link">
+                    <NavLink exact activeClassName="btn btn-dark" to="/">
+                        Home
+                    </NavLink>
+                </button>
+                <button type="button" className="btn btn-link">
+                    <NavLink exact activeClassName="btn btn-dark" to="/logos">
+                        Teams
+                    </NavLink>
+                </button>
+                <button type="button" className="btn btn-link">
+                    <NavLink exact activeClassName="btn btn-dark" to="/blog">
+                        Blog
+                    </NavLink>
+                </button>
                 <hr />
                 <Switch>
                     <Route exact path="/" component={Home} />

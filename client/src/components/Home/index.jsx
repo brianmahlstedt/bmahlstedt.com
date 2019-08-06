@@ -1,5 +1,13 @@
 import React from 'react';
 
-const Home = () => <h1>Welcome to Flavortown</h1>;
+function Home() {
+    return (
+        <div className="container pt-5">
+            <h1 className="text-center">
+                Welcome to Flavortown
+            </h1>
+        </div>
+    );
+}
 
 export default Home;

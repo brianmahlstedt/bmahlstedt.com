@@ -6,6 +6,8 @@
     "axios": "^0",
     "bootstrap": "^4",
     "history": "^4",
+    "jquery": "^3",
+    "popper.js": "^1",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
@@ -20,5 +22,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
