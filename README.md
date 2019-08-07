@@ -12,17 +12,24 @@ Stack:
 
 # Requirements
 
+```bash
 node
 mongodb
+```
 
 # Start backend
 
+```bash
 cd server/
 npm i
 sudo npm i -g nodemon
 nodemon app.js
+```
 
 # Start frontend
+
+```bash
 cd client
 npm i
 npm start
+```
