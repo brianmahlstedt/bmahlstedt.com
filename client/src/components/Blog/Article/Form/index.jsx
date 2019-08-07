@@ -8,6 +8,7 @@ class Form extends React.Component {
 
         this.state = {
             body: '',
+            password: '',
         }
 
         this.handleChangeField = this.handleChangeField.bind(this);
@@ -24,20 +25,22 @@ class Form extends React.Component {
 
     handleSubmit(){
         const { onSubmit, articleToEdit, onEdit } = this.props;
-        const { body } = this.state;
+        const { body, password } = this.state;
 
         if(!articleToEdit) {
             return axios.post('http://localhost:8000/api/articles', {
                 body,
+                password,
             })
                 .then((res) => onSubmit(res.data))
-                .then(() => this.setState({ body: '' }));
+                .then(() => this.setState({ body: '', password: '' }));
         } else {
             return axios.patch(`http://localhost:8000/api/articles/${articleToEdit._id}`, {
                 body,
+                password,
             })
                 .then((res) => onEdit(res.data))
-                .then(() => this.setState({ body: '' }));
+                .then(() => this.setState({ body: '', password: '' }));
         }
     }
 
@@ -49,7 +52,7 @@ class Form extends React.Component {
 
     render() {
         const { articleToEdit } = this.props;
-        const { body } = this.state;
+        const { body, password } = this.state;
 
         return (
             <div className="col-12 col-lg-6 offset-lg-3">
@@ -58,6 +61,13 @@ class Form extends React.Component {
                     value={body}
                     className="form-control my-3"
                     placeholder="Enter post here"
+                />
+                <input
+                    onChange={(ev) => this.handleChangeField('password', ev)}
+                    value={password}
+                    type="password"
+                    className="form-control my-3"
+                    placeholder="Password"
                 />
                 <button
                     onClick={this.handleSubmit}

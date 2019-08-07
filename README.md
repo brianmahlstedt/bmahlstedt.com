@@ -23,8 +23,10 @@ mongodb
 cd server/
 npm i
 sudo npm i -g nodemon
-nodemon app.js
+BLOG_PASSWORD=<> nodemon app.js
 ```
+
+The blog password is the acronym for your football app, and the YY that you developed it for.
 
 # Start frontend
 
