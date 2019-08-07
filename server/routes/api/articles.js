@@ -3,9 +3,11 @@ const router = require('express').Router();
 const Articles = mongoose.model('Articles');
 
 router.post('/', (req, res, next) => {
+    // Deconstruct and distinguish the request body from the blog post body.
     const { body } = req;
-
-    if(!body.body) {
+    const { body: blogPost, password } = body;
+    
+    if(!blogPost) {
         return res.status(422).json({
             errors: {
                 body: 'is required',
@@ -13,7 +15,15 @@ router.post('/', (req, res, next) => {
         });
     }
 
-    const finalArticle = new Articles(body);
+    if(password !== process.env.BLOG_PASSWORD) {
+        return res.status(401).json({
+            errors: {
+                password: 'is incorrect',
+            },
+        });
+    }
+
+    const finalArticle = new Articles({ body: blogPost });
     return finalArticle.save()
         .then(() => res.json({ article: finalArticle.toJSON() }))
         .catch(next);
@@ -44,10 +54,20 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.patch('/:id', (req, res, next) => {
+    // Deconstruct and distinguish the request body from the blog post body.
     const { body } = req;
+    const { body: blogPost, password } = body;
 
-    if(typeof body.body !== 'undefined') {
+    if(typeof blogPost !== 'undefined') {
         req.article.body = body.body;
+    }
+
+    if(password !== process.env.BLOG_PASSWORD) {
+        return res.status(401).json({
+            errors: {
+                password: 'is incorrect',
+            },
+        });
     }
 
     return req.article.save()
@@ -56,6 +76,16 @@ router.patch('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
+    const { password } = req.body
+
+    if(password !== process.env.BLOG_PASSWORD) {
+        return res.status(401).json({
+            errors: {
+                password: 'is incorrect',
+            },
+        });
+    }
+
     return Articles.findByIdAndRemove(req.article._id)
         .then(() => res.sendStatus(200))
         .catch(next);

@@ -21,8 +21,12 @@ class BlogHome extends React.Component {
 
     handleDelete(id) {
         const { onDelete } = this.props;
+        
+        const password = prompt('Password:');
 
-        return axios.delete(`http://localhost:8000/api/articles/${id}`)
+        return axios.delete(`http://localhost:8000/api/articles/${id}`, {
+            data: { password: password } // delete passes through data, not body
+        })
             .then(() => onDelete(id));
     }
 
