@@ -2,8 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-class Form extends React.Component {
-    constructor(props) {
+type MyProps = { onSubmit: SyntheticEvent };
+type MyState = {};
+
+class Form extends React.Component<MyProps, MyState> {
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -14,7 +17,7 @@ class Form extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: any) {
         if(nextProps.articleToEdit) {
             this.setState({
                 body: nextProps.articleToEdit.body,

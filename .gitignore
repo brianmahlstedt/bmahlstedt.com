@@ -62,3 +62,6 @@ typings/
 
 # create-react-app build output
 build/
+
+# typescript garbage
+react-app-env.d.ts
