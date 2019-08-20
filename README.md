@@ -10,27 +10,19 @@ Stack:
 * Backend: node, express
 * Database: mongo
 
-# Requirements
-
-```bash
-node
-mongodb
-```
-
 # Start backend
 
-```bash
-cd server/
-npm i
-sudo npm i -g nodemon
-BLOG_PASSWORD=<> nodemon app.js
+Create a file called server/docker/private.conf with the following content:
+```yml
+BLOG_PASSWORD=<>
+# Whatever you set it to here will be what the user must enter in the frontend
+# to create/edit/delete blog posts.
 ```
 
-The blog password is nominally the acronym for your football app, and the YY
-that you developed it for. Whatever you set it to here (including nothing),
-will obviously be what you must provide in the frontend to create/edit/delete
-blog posts. The other components of the site are not password protected.
-
+Then start the app and database containers:
+```bash
+make [build-]start-[dev|prod]
+```
 
 # Start frontend
 

@@ -2,17 +2,31 @@ version: '3'
 
 services:
 
-  app:
-    container_name: app
+  app-dev:
+    container_name: app-dev
     build:
       context: .
-      dockerfile: ./docker/app/Dockerfile
-    expose:
-      - 8080
-    environment:
-      - VIRTUAL_HOST=bmahlstedt.com,www.bmahlstedt.com
-      - LETSENCRYPT_HOST=bmahlstedt.com
-      - LETSENCRYPT_EMAIL=brian.mahlstedt@gmail.com
+      dockerfile: ./server/docker/Dockerfile
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - 3000:3000
+    command: "node app.js"
+    depends_on:
+      - database
+
+  database:
+    container_name: database
+    image: mongo
+    env_file:
+      - ./server/docker/private.conf
+    ports:
+      - 27017:27017
+    volumes:
+      - db_volume:/data/db
+
+volumes:
+  db_volume:
 
 networks:
   default:
