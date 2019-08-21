@@ -12,7 +12,7 @@ Stack:
 
 # Start backend
 
-Create a file called server/docker/private.conf with the following content:
+Create a file called ./docker/server/private.conf with the following content:
 ```yml
 BLOG_PASSWORD=<>
 # Whatever you set it to here will be what the user must enter in the frontend

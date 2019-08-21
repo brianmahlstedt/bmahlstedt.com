@@ -28,7 +28,9 @@ if(!isProduction) {
     app.use(errorHandler());
 }
 
-mongoose.connect('mongodb://localhost/portfolio-blog', {useNewUrlParser: true});
+// "database" here is the name of the docker container.
+// The NewUrlParser fails on "database name must be string"
+mongoose.connect('mongodb://database:27017', {useNewUrlParser: false});
 mongoose.set('debug', true);
 
 require('./models/Articles');
