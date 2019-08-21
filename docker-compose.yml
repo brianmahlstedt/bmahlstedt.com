@@ -2,40 +2,43 @@ version: '3'
 
 services:
 
-  app-dev:
-    container_name: app-dev
-    build:
-      context: .
-      dockerfile: ./docker/server/Dockerfile
-    volumes:
-      - ./server:/backend
-      - /backend/node_modules
-    ports:
-      - 3000:3000
-    command: "nodemon app.js"
-    depends_on:
-      - frontend
-      - database
-
   frontend:
     container_name: frontend
-    build:
-      context: .
-      dockerfile: ./docker/client/Dockerfile
+    build: ./client
     volumes:
-      - ./client:/frontend
-      - /frontend/node_modules
+      - ./client:/app
+      - /app/node_modules
+    expose:
+      - 3000
     ports:
-      - 3001:3000
+      - 3000:3000
     environment:
       - NODE_ENV=development
+    links:
+      - app-dev
     command: "npm start"
+    depends_on:
+      - app-dev
+
+  app-dev:
+    container_name: app-dev
+    build: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    env_file:
+      - ./private.conf
+    command: "nodemon app.js"
+    depends_on:
+      - database
 
   database:
     container_name: database
     image: mongo
-    env_file:
-      - ./docker/server/private.conf
     ports:
       - 27017:27017
     volumes:
