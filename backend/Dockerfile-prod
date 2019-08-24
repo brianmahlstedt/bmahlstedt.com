@@ -1,0 +1,7 @@
+FROM node 
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY . /app
+RUN npm install
+RUN npm install pm2
+CMD ["pm2-runtime", "app.js"]

@@ -2,17 +2,73 @@ version: '3'
 
 services:
 
-  app:
-    container_name: app
+  btm-frontend-dev:
+    container_name: btm-frontend-dev
     build:
-      context: .
-      dockerfile: ./docker/app/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    links:
+      - btm-backend-dev
+
+  btm-backend-dev:
+    container_name: btm-backend-dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - 8000:8000
+    env_file:
+      - ./private.conf
+    depends_on:
+      - btm-database
+
+  btm-frontend-prod:
+    container_name: btm-frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
     expose:
       - 8080
     environment:
+      - NODE_ENV=production
       - VIRTUAL_HOST=bmahlstedt.com,www.bmahlstedt.com
       - LETSENCRYPT_HOST=bmahlstedt.com
       - LETSENCRYPT_EMAIL=brian.mahlstedt@gmail.com
+    links:
+      - btm-backend-prod
+
+  btm-backend-prod:
+    container_name: btm-backend-prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-prod
+    ports:
+      - 8000:8000
+    env_file:
+      - ./private.conf
+    depends_on:
+      - btm-database
+
+  btm-database:
+    container_name: btm-database
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - db_volume:/data/db
+
+volumes:
+  db_volume:
 
 networks:
   default:

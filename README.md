@@ -5,37 +5,28 @@ This is my personal site.
 It contains a blog as well as other content.
 
 Stack:
-* Language: typescript
+* Language: javascript
 * Frontend: react, redux, router
 * Backend: node, express
 * Database: mongo
 
-# Requirements
-
-```bash
-node
-mongodb
-```
-
 # Start backend
 
-```bash
-cd server/
-npm i
-sudo npm i -g nodemon
-BLOG_PASSWORD=<> nodemon app.js
+Create a file called ./private.conf with the following content:
+```yml
+BLOG_PASSWORD=<>
+# Whatever you set it to here will be what the user must enter in the frontend
+# to create/edit/delete blog posts.
 ```
 
-The blog password is nominally the acronym for your football app, and the YY
-that you developed it for. Whatever you set it to here (including nothing),
-will obviously be what you must provide in the frontend to create/edit/delete
-blog posts. The other components of the site are not password protected.
-
-
-# Start frontend
-
+Then start the frontend/backend/database containers:
 ```bash
-cd client
-npm i
-npm start
+make [build-]start-[dev|prod]
 ```
+
+If starting the dev stack, the app is available at localhost:3000 and changes
+will take effect immediately.
+
+The prod stack is wrapped by my infra repository, with nginx as a reverse proxy
+(including domain routing, since it serves multiple sites) and a letsencrypt
+container for certs that autorenew.
