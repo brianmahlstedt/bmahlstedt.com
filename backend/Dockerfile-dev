@@ -2,6 +2,6 @@ FROM node
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY . /app
-RUN npm install nodemon
 RUN npm install
+RUN npm install nodemon
 CMD ["nodemon", "app.js"]
