@@ -5,7 +5,7 @@ This is my personal site.
 It contains a blog as well as other content.
 
 Stack:
-* Language: typescript
+* Language: javascript
 * Frontend: react, redux, router
 * Backend: node, express
 * Database: mongo
@@ -19,15 +19,14 @@ BLOG_PASSWORD=<>
 # to create/edit/delete blog posts.
 ```
 
-Then start the app and database containers:
+Then start the frontend/backend/database containers:
 ```bash
 make [build-]start-[dev|prod]
 ```
 
-# Start frontend
+If starting the dev stack, the app is available at localhost:3000 and changes
+will take effect immediately.
 
-```bash
-cd client
-npm i
-npm start
-```
+The prod stack is wrapped by my infra repository, with nginx as a reverse proxy
+(including domain routing, since it serves multiple sites) and a letsencrypt
+container for certs that autorenew.

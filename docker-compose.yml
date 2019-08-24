@@ -37,10 +37,12 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile-prod
-    links:
-      - backend-prod
     ports:
       - 80:80
+    environment:
+      - NODE_ENV=development
+    links:
+      - backend-prod
 
   backend-prod:
     container_name: backend-prod
