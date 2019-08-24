@@ -2,8 +2,8 @@ version: '3'
 
 services:
 
-  frontend-dev:
-    container_name: frontend-dev
+  btm-frontend-dev:
+    container_name: btm-frontend-dev
     build:
       context: ./frontend
       dockerfile: Dockerfile-dev
@@ -15,10 +15,10 @@ services:
     environment:
       - NODE_ENV=development
     links:
-      - backend-dev
+      - btm-backend-dev
 
-  backend-dev:
-    container_name: backend-dev
+  btm-backend-dev:
+    container_name: btm-backend-dev
     build:
       context: ./backend
       dockerfile: Dockerfile-dev
@@ -30,10 +30,10 @@ services:
     env_file:
       - ./private.conf
     depends_on:
-      - database
+      - btm-database
 
-  frontend-prod:
-    container_name: frontend-prod
+  btm-frontend-prod:
+    container_name: btm-frontend-prod
     build:
       context: ./frontend
       dockerfile: Dockerfile-prod
@@ -45,10 +45,10 @@ services:
       - LETSENCRYPT_HOST=bmahlstedt.com
       - LETSENCRYPT_EMAIL=brian.mahlstedt@gmail.com
     links:
-      - backend-prod
+      - btm-backend-prod
 
-  backend-prod:
-    container_name: backend-prod
+  btm-backend-prod:
+    container_name: btm-backend-prod
     build:
       context: ./backend
       dockerfile: Dockerfile-prod
@@ -57,10 +57,10 @@ services:
     env_file:
       - ./private.conf
     depends_on:
-      - database
+      - btm-database
 
-  database:
-    container_name: database
+  btm-database:
+    container_name: btm-database
     image: mongo
     ports:
       - 27017:27017
