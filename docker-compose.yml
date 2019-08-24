@@ -2,37 +2,55 @@ version: '3'
 
 services:
 
-  frontend:
-    container_name: frontend
-    build: ./client
+  frontend-dev:
+    container_name: frontend-dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-dev
     volumes:
-      - ./client:/app
+      - ./frontend:/app
       - /app/node_modules
-    expose:
-      - 3000
     ports:
       - 3000:3000
     environment:
       - NODE_ENV=development
     links:
-      - app-dev
-    command: "npm start"
-    depends_on:
-      - app-dev
+      - backend-dev
 
-  app-dev:
-    container_name: app-dev
-    build: ./server
+  backend-dev:
+    container_name: backend-dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
     volumes:
-      - ./server:/app
+      - ./backend:/app
       - /app/node_modules
-    expose:
-      - 8000
     ports:
       - 8000:8000
     env_file:
       - ./private.conf
-    command: "nodemon app.js"
+    depends_on:
+      - database
+
+  frontend-prod:
+    container_name: frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-prod
+    links:
+      - backend-prod
+    ports:
+      - 80:80
+
+  backend-prod:
+    container_name: backend-prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-prod
+    ports:
+      - 8000:8000
+    env_file:
+      - ./private.conf
     depends_on:
       - database
 
